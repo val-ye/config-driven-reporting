@@ -1,0 +1,38 @@
+# Metric catalog: every metric is defined once, for every client.
+#
+# Three kinds of metric:
+#   base     an additive column in the fact table, summed at any grain.
+#   ratio    numerator / denominator, both base measures. Always computed as
+#            sum(numerator) / sum(denominator) after aggregation, never as an
+#            average of row-level ratios.
+#   formula  anything else, with its inputs declared in `requires` so the
+#            resolver can tell whether a client's data supports it.
+#
+# `better` tells the report which direction is good (for target pacing).
+# `{conversion}` in a label is replaced by what the client calls its
+# conversion event, singular (Trial, Install, Order ...).
+
+base:
+  spend:       {label: "Spend",          column: spend,       format: "$,.0f", better: none}
+  impressions: {label: "Impressions",    column: impressions, format: ",.0f",  better: higher}
+  sessions:    {label: "Sessions",       column: sessions,    format: ",.0f",  better: higher}
+  conversions: {label: "{conversion}s",  column: conversions, format: ",.0f",  better: higher, adjustable: true}
+  revenue:     {label: "Revenue",        column: revenue,     format: "$,.0f", better: higher}
+
+ratio:
+  cpa:  {label: "Cost per {conversion}",  num: spend,       den: conversions, format: "$,.2f", better: lower}
+  cvr:  {label: "Conversion rate",        num: conversions, den: sessions,    format: ".2%",   better: higher}
+  roas: {label: "ROAS",                   num: revenue,     den: spend,       format: ".2fx",  better: higher}
+  aov:  {label: "Average order value",    num: revenue,     den: conversions, format: "$,.2f", better: higher}
+  ctr_sessions: {label: "Sessions per 1,000 impressions", num: sessions, den: impressions, scale: 1000, format: ",.1f", better: higher}
+
+formula:
+  # ROI and ROAS are not the same thing. ROAS = revenue / spend.
+  # ROI here = (revenue - spend) / spend. Name them separately so nobody
+  # has to guess which one a client means.
+  roi:
+    label: "ROI"
+    requires: [revenue, spend]
+    sql: "(sum(revenue) - sum(spend)) / nullif(sum(spend), 0)"
+    format: ".1%"
+    better: higher

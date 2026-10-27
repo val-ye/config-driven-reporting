@@ -1,0 +1,46 @@
+# One record per client. Onboarding a client = adding a record here.
+#
+# name          display name
+# week_start    the client's reporting week (sunday ... saturday)
+# conversion    what this client calls one conversion (singular: Trial, Install)
+# kpi_types     which KPI templates apply (semantic/kpi_templates.yaml);
+#               most clients have one, some have two
+# sends         which base measures this client actually gives us. As a third
+#               party we can ask for data, but the client decides what we get.
+# labels        optional: what this client calls each metric. Same math,
+#               different name: one client's CPA is another's CPO, one's
+#               sessions are another's visits. Asked at onboarding:
+#               "how do you calculate this KPI, and what do you call it?"
+# adjustments   optional agreed multipliers on base measures
+#               (e.g. installs the client's tracking is known to miss)
+# extra_kpis    optional metrics added after the template ones
+# targets       optional per-metric targets for pacing in the report
+#
+# All clients and numbers are fictional.
+
+brewbox:
+  name: BrewBox Coffee Subscription
+  week_start: monday
+  conversion: Trial
+  kpi_types: [cpa]
+  sends: [spend, impressions, sessions, conversions]
+  labels: {sessions: Visits}
+  targets: {cpa: 45.0}
+
+pulsefit:
+  name: PulseFit App
+  week_start: sunday
+  conversion: Install
+  kpi_types: [cpa]
+  sends: [spend, impressions, conversions]      # no site sessions: it is an app
+  adjustments: {conversions: 1.15}
+  targets: {cpa: 30.0}
+
+juniper:
+  name: Juniper & Oak Home Goods
+  week_start: sunday
+  conversion: Order
+  kpi_types: [roas, cpa]                        # one of the few that watches both
+  sends: [spend, impressions, sessions, conversions, revenue]
+  labels: {cpa: CPO, roas: ROI}                 # their names; the math is the catalog's
+  targets: {roas: 3.5, cpa: 60.0}

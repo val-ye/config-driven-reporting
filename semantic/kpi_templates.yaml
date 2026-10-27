@@ -1,0 +1,12 @@
+# KPI templates: the standard set of KPIs for each kind of client goal.
+#
+# A client picks one or more kpi_types in config/clients.yaml. The resolver
+# merges their templates in order (dropping duplicates), then removes any
+# metric the client's data cannot support and says why.
+#
+# Order matters: it is the order of the KPI slots on the report.
+
+cpa:   [spend, conversions, cpa, sessions, cvr]
+roas:  [spend, revenue, roas, conversions, aov]
+roi:   [spend, revenue, roi, roas]
+reach: [spend, impressions, sessions, ctr_sessions]

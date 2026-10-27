@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use or refer to this work, please cite it as below."
+title: "config-driven-reporting: one data model, one metric catalog and per-audience configuration for scalable reporting"
+authors:
+  - family-names: "Ye"
+    given-names: "Val"
+version: 0.1.0
+date-released: 2026-10-31
+license: MIT
+# doi: add the Zenodo DOI after the first release
+repository-code: "https://github.com/val-ye/config-driven-reporting"
