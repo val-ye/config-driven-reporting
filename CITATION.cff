@@ -9,3 +9,12 @@ date-released: 2026-10-31
 license: MIT
 # doi: add the Zenodo DOI after the first release
 repository-code: "https://github.com/val-ye/config-driven-reporting"
+references:
+  - type: article
+    title: "How to Report for 100+ Clients With One Semantic Model"
+    authors:
+      - family-names: "Ye"
+        given-names: "Val"
+    journal: "Towards Data Science"
+    date-published: 2026-11-05
+    url: "https://towardsdatascience.com/how-to-report-for-100-clients-with-one-semantic-model/"

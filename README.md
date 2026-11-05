@@ -6,9 +6,9 @@ between them in configuration.** The audiences can be agency clients (the
 example used here), business units, brands, regions or markets: any setting
 where many groups need the same kind of report built around their own KPIs.
 
-It accompanies the article *One Model, a Hundred Clients* (configuration-driven
-reporting: one semantic model, one metric catalog, and a few lines of
-configuration per audience) by Val Ye [link once published]. All data is
+It accompanies the article [*How to Report for 100+ Clients With One Semantic
+Model*](https://towardsdatascience.com/how-to-report-for-100-clients-with-one-semantic-model/)
+by Val Ye, published in Towards Data Science on November 5, 2026. All data is
 synthetic and all three clients are fictional.
 
 ## The idea in one picture
